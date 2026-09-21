@@ -1,30 +1,35 @@
-// Last updated: 9/21/2026, 4:58:53 PM
+// Last updated: 9/21/2026, 7:21:47 PM
 1class Solution {
-2    public String simplifyPath(String path) {
-3        Stack<String> st = new Stack<>();
-4        String[] pt = path.split("/");
-5        for (String p : pt) {
-6            if (p.equals("") || p.equals(".")) {
-7                continue;
-8            }
-9            if (p.equals("..")) {
-10                if (!st.isEmpty()) {
-11                    st.pop();
-12                }
-13            }
-14            else {
-15                st.push(p);
-16            }
-17        }
-18        StringBuilder res = new StringBuilder();
-19        for (String f : st) {
-20            res.append("/");
-21            res.append(f);
-22        }
-23
-24        if (res.length() == 0) {
-25            return "/";
-26        }
-27        return res.toString();
-28    }
-29}
+2    public String decodeString(String s) {
+3        Stack<Integer> cSt = new Stack<>();
+4        Stack<String> st = new Stack<>();
+5
+6        String cString = "";
+7        int cNumber = 0;
+8        for (char ch : s.toCharArray()) {
+9            if (Character.isDigit(ch)) {
+10                cNumber = cNumber*10 + (ch-'0');
+11            }
+12            else if (ch == '[') {
+13                cSt.push(cNumber);
+14                st.push(cString);
+15                cNumber = 0;
+16                cString = "";
+17            }
+18            else if (ch == ']') {
+19                int c = cSt.pop();
+20                String pString = st.pop();
+21                StringBuilder temp = new StringBuilder();
+22
+23                for (int i=0; i<c; i++) {
+24                    temp.append(cString);
+25                }
+26                cString = pString+temp.toString();
+27            }
+28            else {
+29                cString += ch;
+30            }
+31        }
+32        return cString;
+33    }
+34}
