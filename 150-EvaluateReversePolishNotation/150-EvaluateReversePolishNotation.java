@@ -1,32 +1,30 @@
-// Last updated: 9/21/2026, 4:38:23 PM
+// Last updated: 9/21/2026, 4:58:53 PM
 1class Solution {
-2    public int evalRPN(String[] tokens) {
-3        Stack<Integer> st = new Stack<>();
-4
-5        for (String token : tokens) {
-6            if (token.equals("*") || token.equals("+") || token.equals("/") || token.equals("-")) {
-7                int b = st.pop();
-8                int a = st.pop();
-9                int res = 0;
-10                if (token.equals("+")) {
-11                    res = a+b;
+2    public String simplifyPath(String path) {
+3        Stack<String> st = new Stack<>();
+4        String[] pt = path.split("/");
+5        for (String p : pt) {
+6            if (p.equals("") || p.equals(".")) {
+7                continue;
+8            }
+9            if (p.equals("..")) {
+10                if (!st.isEmpty()) {
+11                    st.pop();
 12                }
-13                else if (token.equals("-")) {
-14                    res = a-b;
-15                }
-16                else if (token.equals("*")) {
-17                    res = a*b;
-18                }
-19                else {
-20                    res = a/b;
-21                }
-22                st.push(res);
-23            }
-24            else {
-25                st.push(Integer.parseInt(token));
-26            }
-27
-28        }
-29        return st.pop();
-30    }
-31}
+13            }
+14            else {
+15                st.push(p);
+16            }
+17        }
+18        StringBuilder res = new StringBuilder();
+19        for (String f : st) {
+20            res.append("/");
+21            res.append(f);
+22        }
+23
+24        if (res.length() == 0) {
+25            return "/";
+26        }
+27        return res.toString();
+28    }
+29}
