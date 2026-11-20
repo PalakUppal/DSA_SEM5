@@ -1,4 +1,4 @@
-// Last updated: 11/20/2026, 5:26:09 PM
+// Last updated: 11/20/2026, 5:27:32 PM
 1class Solution {
 2    static void dfs(int city, int[][] isConnected, boolean[] visited) {
 3        visited[city] = true;
