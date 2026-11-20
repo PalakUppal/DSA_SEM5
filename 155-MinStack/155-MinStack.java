@@ -1,4 +1,4 @@
-// Last updated: 9/14/2026, 5:14:34 PM
+// Last updated: 11/20/2026, 6:12:22 PM
 1class MinStack {
 2    Stack<Integer> stack;
 3    Stack<Integer> minStack;
